@@ -4,7 +4,7 @@ import gsap from 'gsap';
 import EventCard from '../../components/EventCard/EventCard';
 import Footer from '../../components/Footer/Footer';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
-import type { TicketmasterEvent } from '../../services/api';
+import type { TicketmasterEvent } from '@/types';
 
 const Favorites = () => {
   const [favorites, setFavorites] = useLocalStorage<TicketmasterEvent[]>('eventai_favorites', []);
