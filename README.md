@@ -10,7 +10,7 @@
 
 ## 🎯 Arquitetura & Decisões do Projeto
 
-Como engenheiro de software, projetei esta aplicação focando em performance, experiência do usuário (UX) e manutenção de código a longo prazo. Abaixo, detalho as respostas para as principais questões arquiteturais desta aplicação.
+Como desenvolvedor fullstack, projetei esta aplicação focando em performance, experiência do usuário (UX) e manutenção de código a longo prazo. Abaixo, detalho as respostas para as principais questões arquiteturais desta aplicação.
 
 ### A. O que foi desenvolvido e com quais tecnologias?
 O **Event AI** é uma Single Page Application (SPA) focada na exploração geolocalizada e textual de eventos culturais e de entretenimento.
@@ -44,7 +44,7 @@ A stack tecnológica principal consiste em:
 **Plano de Escala Institucional & Business Vision:**
 - **Inversão de Proxy (BFF):** Para escalar sob tráfego real, eu não proxyaria pelo Vite (que é voltado a Dev), mas sim criaria um _Backend For Frontend_ (Node.js/Go) usando Cloudflare Workers, a fim de proteger completamente o token da API da TM e aplicar um cache global no Redis.
 - **Integração Real com IA (Analytics & Preços):** Como visão de negócio, este sistema interligaria um LLM responsável por analisar a relação show vs. preço. O modelo atuaria sugerindo eventos sub-precificados (ex: artistas emergentes) que podem lotar de forma similar a eventos badalados, avaliando o comportamento sócio-econômico das cidades em tempo real.
-- **Caso de Uso Comercial (Aplicações "Mude - Vida pra Valer"):** Refazer o ecossistema com foco no universo interativo e de alto impacto da Mude. Construir isso para consolidar como um **Showcase Matador**, permitindo que novos clientes vislumbrem os serviços da Mude de maneira hiper-visceral, exibindo todo o portfólio de ativações, eventos de life-style e wellness que a Mude opera ao vivo de forma interativa.
+- **Caso de Uso Comercial (Aplicações para a Mude):** Refazer o ecossistema com foco no universo interativo e de alto impacto da Mude. Construir isso para consolidar como um **Showcase**, permitindo que novos clientes vislumbrem os serviços da Mude de maneira hiper-visceral, exibindo todo o portfólio de eventos que a Mude opera ao vivo de forma interativa.
 - **Gerenciamento de Estado de Usuários:** A funcionalidade de "Favoritos" sairia do `localStorage` do dispositivo e migraríamos o usuário para autenticação via OAuth/JWT vinculando seus shows favoritos em um banco PostgreSQL (como Supabase).
 
 ### D. O que eu faria diferente com mais tempo?
@@ -52,32 +52,6 @@ A stack tecnológica principal consiste em:
 - **Páginas Específicas (`/event/:id`):** Hoje direcionamos o usuário diretamente ao Ticketmaster. Ter uma página aninhada nativa permitiria expor mapa de assentos locais, previsão do tempo na data, entre outros widgets de engajamento.
 - **Cobertura de Testes (TDD/E2E):** Implementaria uma suíte severa rodando test runners com **Vitest / React Testing Library** focado no motor de parser da Ticketmaster, além de **Cypress / Playwright** para emular a concessão fluida (e negativação de permissão) do GPS e garantir o render dos fallbacks dinâmicos se o GPS falhar.
 - **Monitoramento:** Adicionaria um Sentry para observar como a API se comporta frente aos milhares de formatos não-padronizados devolvidos pela Ticketmaster.
-
----
-
-## 🚀 Como Executar Localmente
-
-### Pré-requisitos
-- **Node.js** (v18+) e NPM.
-- Uma API Key oficial e gratuita conquistada no [Ticketmaster Developer Portal](https://developer.ticketmaster.com/).
-
-### Passo a passo
-1. Clone o repositório:
-```bash
-git clone https://github.com/nazarejose/event-ai.git
-```
-2. Instale as dependências:
-```bash
-npm install
-```
-3. Crie um arquivo `.env` na raiz rodando com sua key:
-```env
-VITE_TICKETMASTER_API_KEY=sua_chave_aqui
-```
-4. Suba a aplicação em modo dev (o Vite atuará como proxy proxy automático para burlar o CORS):
-```bash
-npm run dev
-```
 
 ---
 *Criado com dedicação e boas práticas no Front-End.*
