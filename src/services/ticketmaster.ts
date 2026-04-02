@@ -1,6 +1,6 @@
 import type { SearchFilters, TicketmasterResponse } from '@/types';
 
-const API_BASE = '/api/ticketmaster/discovery/v2/events.json';
+const API_BASE = 'https://app.ticketmaster.com/discovery/v2/events.json';
 
 function getApiKey(): string {
   return import.meta.env.VITE_TICKETMASTER_API_KEY || '';
