@@ -37,27 +37,3 @@ export async function searchEvents(
 
   return response.json();
 }
-
-/**
- * Search with city fallback:
- * 1. Search with city filter
- * 2. If no results and city was provided → retry without city (global)
- */
-export async function searchEventsWithFallback(
-  filters: SearchFilters
-): Promise<{ data: TicketmasterResponse; usedFallback: boolean }> {
-  const result = await searchEvents(filters);
-
-  const hasResults =
-    result._embedded && result._embedded.events && result._embedded.events.length > 0;
-
-  if (!hasResults && filters.city) {
-    const globalResult = await searchEvents({
-      ...filters,
-      city: undefined,
-    });
-    return { data: globalResult, usedFallback: true };
-  }
-
-  return { data: result, usedFallback: false };
-}

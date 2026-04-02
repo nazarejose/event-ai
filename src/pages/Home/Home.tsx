@@ -12,7 +12,7 @@ import type { TicketmasterEvent } from '@/types';
 const ITEMS_PER_PAGE = 8;
 
 const Home = () => {
-  const { events, loading, error, isEmpty, usedFallback, search } = useEvents();
+  const { events, loading, error, isEmpty, search } = useEvents();
   const [favorites, setFavorites] = useLocalStorage<TicketmasterEvent[]>('eventai_favorites', []);
   const [page, setPage] = useState(0);
   const navigate = useNavigate();
@@ -43,9 +43,6 @@ const Home = () => {
         <div className="flex justify-between items-end mb-10">
           <div>
             <h2 className="text-4xl font-extrabold tracking-tight text-gray-900">Eventos em Destaque</h2>
-            {usedFallback && (
-              <p className="text-sm text-gray-400 mt-1">Nenhum evento encontrado na sua cidade. Exibindo eventos globais.</p>
-            )}
           </div>
           <div className="hidden md:flex gap-3">
             <button

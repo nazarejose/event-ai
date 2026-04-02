@@ -43,9 +43,25 @@ const EventCard = ({ event, isFavorite, onToggleFavorite, index, variant = 'dark
   const city = venue?.city?.name || venue?.name || venue?.state?.name || 'Evento Online / Não informada';
   const country = venue?.country?.countryCode || 'BR';
 
-  const formatTag = (eventName: string) => {
-    const words = eventName.split(' ');
-    if (words.length > 0 && words[0].length > 4) return words[0].toUpperCase();
+  const getArtistTag = (): string => {
+    // 1. Try direct attraction (artist/band) name from Ticketmaster
+    const attraction = event._embedded?.attractions?.[0]?.name;
+    if (attraction) return attraction.toUpperCase();
+
+    // 2. Parse event name: extract text before " - " or ":"
+    const name = event.name;
+    const beforeDash = name.split(' - ')[0].trim();
+    const beforeColon = beforeDash.split(':')[0].trim();
+    if (beforeColon && beforeColon !== name) return beforeColon.toUpperCase();
+
+    // 3. Try classification segment (Music, Sports, etc.)
+    const segment = event.classifications?.[0]?.segment?.name;
+    if (segment && segment !== 'Undefined') return segment.toUpperCase();
+
+    // 4. Fallback: first word if reasonably long
+    const firstWord = name.split(' ')[0];
+    if (firstWord.length > 3) return firstWord.toUpperCase();
+
     return 'EVENTS';
   };
 
@@ -79,7 +95,7 @@ const EventCard = ({ event, isFavorite, onToggleFavorite, index, variant = 'dark
         <div className="py-5 flex flex-col flex-1 px-3">
           <div className="flex items-center gap-2 mb-3">
             <span className="text-[10px] font-bold tracking-wider text-indigo-600 bg-indigo-50 px-2 py-1 rounded-sm uppercase">
-              {formatTag(event.name)}
+              {getArtistTag()}
             </span>
             <span className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
               {shortDate}

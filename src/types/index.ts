@@ -60,6 +60,7 @@ export interface TicketmasterEvent {
   classifications?: TicketmasterClassification[];
   _embedded?: {
     venues?: TicketmasterVenue[];
+    attractions?: { id: string; name: string; url?: string }[];
   };
 }
 
