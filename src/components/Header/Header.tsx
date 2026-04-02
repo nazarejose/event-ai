@@ -5,12 +5,12 @@ import gsap from 'gsap';
 const Header = () => {
   const location = useLocation();
   const headerRef = useRef<HTMLElement>(null);
-  
+
   const isFavorites = location.pathname === '/favorites';
 
   useEffect(() => {
     if (headerRef.current) {
-      gsap.fromTo(headerRef.current, 
+      gsap.fromTo(headerRef.current,
         { opacity: 0, y: -20 },
         { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }
       );

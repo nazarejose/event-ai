@@ -46,7 +46,7 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
           placeholder="Qual evento você está procurando?" 
           value={keyword}
           onChange={(e) => setKeyword(e.target.value)}
-          className="w-full pl-6 pr-14 py-6 rounded-full border-gray-200 bg-gray-50 focus-visible:ring-primary focus-visible:bg-white text-base"
+          className="w-full pl-4 sm:pl-6 pr-12 sm:pr-14 py-6 rounded-full border border-gray-200 bg-gray-50 hover:bg-gray-100 hover:border-gray-300 focus-visible:ring-primary focus-visible:bg-white transition-colors text-xs sm:text-sm md:text-base"
         />
         <Button 
           type="submit" 
@@ -59,7 +59,7 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
       </div>
       
       <div className="flex flex-col md:flex-row gap-4">
-        <div className="flex-1 flex items-center gap-3 bg-gray-50 px-5 py-3 rounded-full border border-transparent focus-within:border-gray-200 focus-within:bg-white transition-colors">
+        <div className="flex-1 flex items-center gap-3 bg-gray-50 hover:bg-gray-100 px-5 py-3 rounded-full border border-transparent hover:border-gray-300 focus-within:border-gray-200 focus-within:bg-white transition-colors">
           <MapPin size={18} className="text-gray-400" />
           <input 
             type="text" 

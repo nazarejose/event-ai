@@ -4,8 +4,6 @@ interface HeroProps {
   onSearch: (keyword: string, city: string) => void;
 }
 
-//const HERO_IMG = "https://images-ext-1.discordapp.net/external/Eg7Ui8O9mrWsGnGL1-OE4zXjnvdPEnhN0RpStLAMmVI/%3Fw%3D1600%26h%3D600%26fit%3Dcrop%26crop%3Dtop%26q%3D85/https/images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?format=webp";
-
 const Hero = ({ onSearch }: HeroProps) => {
   return (
     <div className="relative w-full h-[500px] mb-40 rounded-[32px]">
