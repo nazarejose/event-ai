@@ -2,7 +2,7 @@ import { useRef, useEffect } from 'react';
 import { Heart, MapPin } from 'lucide-react';
 import gsap from 'gsap';
 import { Pointer } from '../ui/pointer';
-import type { TicketmasterEvent } from '../../services/api';
+import type { TicketmasterEvent } from '@/types';
 
 interface EventCardProps {
   event: TicketmasterEvent;
@@ -30,15 +30,18 @@ const EventCard = ({ event, isFavorite, onToggleFavorite, index, variant = 'dark
     }
   };
 
-  const sortedImages = [...(event.images || [])].sort((a, b) => b.width - a.width);
-  const imageUrl = sortedImages.find(img => img.ratio === "4_3" || img.ratio === "3_2" || img.ratio === "16_9")?.url || sortedImages[0]?.url;
+  const validImages = (event.images || []).filter(img => !(img as any).fallback);
+  const imageSource = validImages.length > 0 ? validImages : (event.images || []);
+  const sortedImages = [...imageSource].sort((a, b) => b.width - a.width);
+  const imageUrl = sortedImages.find(img => img.ratio === "3_4" || img.ratio === "4_3" || img.ratio === "16_9")?.url || sortedImages[0]?.url;
 
   const dateObj = new Date(event.dates.start.localDate);
   const formattedDate = dateObj.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' }).toUpperCase();
   const shortDate = formattedDate.split(' DE ').join(' ');
 
-  const city = event._embedded?.venues?.[0]?.city?.name || 'Localização não informada';
-  const country = event._embedded?.venues?.[0]?.country?.countryCode || 'BR';
+  const venue = event._embedded?.venues?.[0];
+  const city = venue?.city?.name || venue?.name || venue?.state?.name || 'Evento Online / Não informada';
+  const country = venue?.country?.countryCode || 'BR';
 
   const formatTag = (eventName: string) => {
     const words = eventName.split(' ');

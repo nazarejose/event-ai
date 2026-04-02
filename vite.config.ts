@@ -11,4 +11,15 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  server: {
+    proxy: {
+      '/api/ticketmaster': {
+        target: 'https://app.ticketmaster.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/ticketmaster/, ''),
+        secure: true,
+      },
+    },
+  },
 })
+
