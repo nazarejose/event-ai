@@ -49,6 +49,7 @@ const Home = () => {
               onClick={() => setPage(p => Math.max(0, p - 1))}
               disabled={page === 0}
               name='search-prev'
+              aria-label="Página anterior"
               className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-900 placeholder:text-gray-400 hover:bg-gray-50 transition-colors disabled:opacity-30 disabled:cursor-not-allowed">
               <ChevronLeft size={20} />
             </button>
@@ -56,6 +57,7 @@ const Home = () => {
               onClick={() => setPage(p => Math.min(totalPages - 1, p + 1))}
               disabled={page >= totalPages - 1}
               name='search-next'
+              aria-label="Próxima página"
               className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-900 hover:bg-gray-50 transition-colors disabled:opacity-30 disabled:cursor-not-allowed">
               <ChevronRight size={20} />
             </button>
